@@ -293,28 +293,131 @@
     }
 
     /* ========================================================= */
-    /* --- QUADRADO RESERVADO (LADO DIREITO DA SEÇÃO 2) --- */
+    /* --- ENVELOPE CRIATIVO DO CHAT (NOVA MOLDURA) --- */
     /* ========================================================= */
-    .placeholder-box {
+    .community-chat-wrapper {
+        position: relative; /* Necessário para os elementos flutuantes */
         flex: 1;
         min-width: 320px;
-        max-width: 600px; 
-        height: 300px;
-        border: 4px dashed rgba(255, 255, 255, 0.6);
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
+        max-width: 600px;
+        height: 315px; /* Altura casada com o MP3 Player */
+        /* Degradê lilás combinando com a câmera e webcam */
+        background: linear-gradient(135deg, #e0c3fc 0%, #a066ff 100%);
+        border-radius: 30px;
+        padding: 15px; /* Espaço para a moldura aparecer */
+        box-shadow: 
+            inset 2px 2px 5px rgba(255,255,255,0.6), 
+            inset -5px -5px 15px rgba(0,0,0,0.3),
+            5px 10px 20px rgba(0,0,0,0.6);
+        border: 2px solid #572970;
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
     }
 
-    .placeholder-box p {
+    /* ========================================================= */
+    /* --- CHAT GLOBAL RETRÔ (DENTRO DA MOLDURA) --- */
+    /* ========================================================= */
+    .global-community-chat {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, #ffe6f5 0%, #ffcee4 50%, #ffb3d6 100%);
+        border-radius: 20px; /* Levemente menor que a moldura externa */
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 
+            inset 0 3px 6px rgba(255,255,255,0.8),
+            inset 0 -3px 6px rgba(0,0,0,0.2);
+        /* BORDA ROSA CLARO SOLICITADA */
+        border: 2px solid #ffcce6;
+    }
+
+    .chat-title-bar {
         font-family: 'VT323', monospace;
-        font-size: 1.5rem;
-        color: #fff;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        font-size: 1.3rem;
+        color: #572970;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 1px 1px 0px #fff;
+        letter-spacing: 1px;
+    }
+
+    .chat-messages-screen {
+        flex: 1;
+        background: #15001c; /* Tela escura arroxeada retro geek */
+        border: 3px solid #333;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: inset 0 0 12px rgba(0,0,0,1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.8rem;
+        color: #ffffff;
+    }
+
+    /* Customização da barra de rolagem */
+    .chat-messages-screen::-webkit-scrollbar {
+        width: 6px;
+    }
+    .chat-messages-screen::-webkit-scrollbar-track {
+        background: #08000a;
+    }
+    .chat-messages-screen::-webkit-scrollbar-thumb {
+        background: #ff88cc; /* Rosa claro na scrollbar também */
+        border-radius: 3px;
+    }
+
+    .chat-row-msg {
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    .user-tag-global {
+        color: #ff88cc; /* Rosa diva pro nick dos outros */
+        font-weight: bold;
+    }
+
+    .user-tag-me {
+        color: #00ff00; /* Verde neon vibrante para você */
+        font-weight: bold;
+    }
+
+    .chat-footer-controls {
+        display: flex;
+        gap: 6px;
+    }
+
+    .chat-input-field {
+        flex: 1;
+        background: #fff;
+        border: 2px solid #ff88cc; /* Borda rosa no input também */
+        border-radius: 15px;
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        outline: none;
+        box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .btn-send-chat {
+        background: linear-gradient(145deg, #ffcce6, #ff88cc); /* Botão rosa claro */
+        border: 2px solid #572970;
+        color: #572970; /* Texto escuro no botão rosa */
+        border-radius: 15px;
+        padding: 5px 14px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        cursor: pointer;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        transition: transform 0.1s;
+    }
+
+    .btn-send-chat:active {
+        transform: scale(0.95);
     }
 
     /* ========================================================= */
@@ -322,26 +425,23 @@
     /* ========================================================= */
     #third-section {
         margin-top: 60px;
-        align-items: flex-start; /* Alinha no topo */
+        align-items: flex-start; 
     }
 
-    /* LADO ESQUERDO: Coluna Vazia (Aumentado para empurrar os cards para direita) */
     .empty-column {
-        flex: 1.5; /* Ocupa mais espaço, empurrando os cards */
+        flex: 1.5; 
         min-width: 300px;
     }
 
-    /* LADO DIREITO: Coluna de Cartões */
     .card-column {
-        flex: 1; /* Ocupa menos espaço para ficar estreito */
+        flex: 1; 
         display: flex;
         flex-direction: column;
         gap: 20px;
-        align-items: flex-end; /* Encosta os cards na extremidade direita */
+        align-items: flex-end; 
         min-width: 320px;
     }
 
-    /* O Card estilo Windows Antigo */
     .old-windows-card {
         border: 2px solid #572970;
         border-radius: 8px;
@@ -350,13 +450,12 @@
             inset 2px 2px 5px rgba(0,0,0,0.1),
             5px 10px 15px rgba(0,0,0,0.4);
         width: 100%;
-        max-width: 420px; /* Bem mais estreito como pedido */
+        max-width: 420px; 
         overflow: hidden;
         display: flex;
         flex-direction: column;
     }
 
-    /* Cabeçalho da Janela */
     .card-header {
         height: 35px;
         border-bottom: 2px solid #572970;
@@ -399,18 +498,16 @@
         box-shadow: inset 1px 1px 2px #ff6666, inset -1px -1px 2px #660000;
     }
 
-    /* Corpo do Cartão: Layout Lado a Lado (Foto Esquerda / Texto Direita) */
     .card-body {
         padding: 12px;
         display: flex;
-        flex-direction: row; /* Coloca os itens lado a lado */
+        flex-direction: row; 
         gap: 15px;
         align-items: flex-start;
     }
 
-    /* Área da Imagem (Quadradinho) */
     .card-image-wrapper {
-        width: 85px;  /* Altura/Largura menores */
+        width: 85px;  
         height: 85px;
         flex-shrink: 0;
         border-radius: 5px;
@@ -425,17 +522,16 @@
         object-fit: cover;
     }
 
-    /* Área do Texto (À direita da foto) */
     .card-text-wrapper {
         text-align: left;
         display: flex;
         flex-direction: column;
-        flex: 1; /* Preenche o resto do espaço */
+        flex: 1; 
     }
 
     .card-title {
-        font-family: 'Titan One', cursive; /* Fonte impactante similar ao exemplo */
-        color: #2e6e30; /* Verde escuro retro */
+        font-family: 'Titan One', cursive; 
+        color: #2e6e30; 
         font-size: 1.1rem;
         margin: 0 0 5px 0;
         line-height: 1.1;
@@ -450,7 +546,6 @@
         margin: 0 0 10px 0;
     }
 
-    /* Botão/Link no estilo da imagem de referência */
     .card-link {
         font-family: Arial, sans-serif;
         font-weight: bold;
@@ -459,7 +554,7 @@
         text-decoration: none;
         padding: 4px 10px;
         border-radius: 3px;
-        align-self: flex-start; /* Fica alinhado à esquerda na sua própria coluna */
+        align-self: flex-start; 
         transition: 0.2s;
     }
 
@@ -471,8 +566,8 @@
         #hero, #section-two { margin-bottom: 40px; padding-bottom: 40px; gap: 40px; flex-direction: column; }
         
         #third-section { flex-direction: column; gap: 30px; }
-        .empty-column { display: none; } /* Esconde o espaço vazio no celular */
-        .card-column { width: 100%; align-items: center; } /* Centraliza os cards no celular */
+        .empty-column { display: none; } 
+        .card-column { width: 100%; align-items: center; } 
         
         .webcam-main-container { width: 300px; height: 300px; min-width: 300px; }
         .webcam-housing { box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 0 10px #d6a1e3, 0 0 0 12px #fff, inset 0 0 20px rgba(214, 161, 227, 0.5); }
@@ -572,8 +667,22 @@
                 </div>
             </div>
 
-            <div class="placeholder-box">
-                <p>Seu<br>conteúdo<br>aqui<br>(Em Breve)</p>
+            <div class="community-chat-wrapper fun-hover">
+                <div class="float-el" style="top:-15px; right:-15px; animation-delay: 0.5s;">✨</div>
+                <div class="float-el" style="bottom:10px; right:-20px; animation-delay: 1.2s;">💖</div>
+
+                <div class="global-community-chat">
+                    <div class="chat-title-bar">💬 CHAT DA COMUNIDADE GLOBAL</div>
+                    <div class="chat-messages-screen" id="chat-messages-screen">
+                        <div class="chat-row-msg"><span class="user-tag-global">[DivaBot]:</span> Bem-vindos ao iDiva's Portal! Compartilhem músicas e novidades! 💕</div>
+                        <div class="chat-row-msg"><span class="user-tag-global">[Anônimo47]:</span> Caramba, esse player tocando Beyoncé ficou muito nostalgia.</div>
+                        <div class="chat-row-msg"><span class="user-tag-global">[CyberQueen]:</span> Alguém online pra atualizar a wiki do iSongs hj? ✨</div>
+                    </div>
+                    <div class="chat-footer-controls">
+                        <input type="text" id="chat-input-field" class="chat-input-field" placeholder="Escreva uma mensagem..." maxlength="120" onkeydown="if(event.key === 'Enter') sendChatMessage()">
+                        <button class="btn-send-chat" onclick="sendChatMessage()">Enviar</button>
+                    </div>
+                </div>
             </div>
 
         </section>
@@ -651,11 +760,12 @@
 
         </section>
 
-    </div> <script>
+    </div> 
+
+    <script>
     /* =========================================================
        LÓGICA DO MP3 PLAYER & ESPECTRO DE ÁUDIO
        ========================================================= */
-    
     const playlistData = [
         { 
             title: "Crazy in Love", 
@@ -713,14 +823,11 @@
 
     function drawSpectrum() {
         requestAnimationFrame(drawSpectrum);
-
-        // Garante que o canvas use o tamanho real dele na tela
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
 
         analyser.getByteFrequencyData(dataArray);
 
-        // Fundo da telinha
         ctx.fillStyle = '#001a00'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -729,15 +836,9 @@
         let x = 0;
 
         for (let i = 0; i < bufferLength; i++) {
-            // === O SEGREDO ESTÁ AQUI ===
-            // Dividimos por 255 para ter uma porcentagem (0.0 a 1.0)
-            // Multiplicamos pela altura do canvas para caber perfeitamente
-            // O * 0.9 no final deixa uma folguinha no teto para não bater na borda!
             barHeight = (dataArray[i] / 255) * canvas.height * 0.9; 
-
             ctx.fillStyle = '#00ff00';
             ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
-
             x += barWidth;
         }
     }
@@ -772,8 +873,62 @@
 
     audio.addEventListener('ended', nextTrack);
 
+    /* =========================================================
+       LÓGICA FRONT-END INTERATIVA DO CHAT COMUNITÁRIO
+       ========================================================= */
+    function sendChatMessage() {
+        const inputField = document.getElementById('chat-input-field');
+        const messageScreen = document.getElementById('chat-messages-screen');
+        const text = inputField.value.trim();
+
+        if (text === '') return;
+
+        // Injeta a mensagem enviada pelo usuário local
+        const userMsgRow = document.createElement('div');
+        userMsgRow.className = 'chat-row-msg';
+        userMsgRow.innerHTML = `<span class="user-tag-me">[Você]:</span> ${escapeHTML(text)}`;
+        messageScreen.appendChild(userMsgRow);
+        
+        // Reseta o input e joga o scroll para baixo
+        inputField.value = '';
+        messageScreen.scrollTop = messageScreen.scrollHeight;
+
+        // Efeito interativo: Simulação de uma resposta randômica da comunidade após 1.5 segundos
+        setTimeout(() => {
+            const randomReplies = [
+                "Arrasou divaaa! ✨ Sim!",
+                "rt kkkkkkk mto bom",
+                "Amooo! Quem aí tá navegando no iSongs tbm?",
+                "Siiiim!! 💖💖",
+                "Oii gente, acabei de entrar no portal!",
+                "Concordo total!!"
+            ];
+            const mockNicknames = ["DivaY2K", "PopPrincess", "GigaBabado", "CyberBabe", "BoyRetro"];
+            
+            const randomUser = mockNicknames[Math.floor(Math.random() * mockNicknames.length)];
+            const randomMsg = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+
+            const mockMsgRow = document.createElement('div');
+            mockMsgRow.className = 'chat-row-msg';
+            mockMsgRow.innerHTML = `<span class="user-tag-global">[${randomUser}]:</span> ${randomMsg}`;
+            
+            messageScreen.appendChild(mockMsgRow);
+            messageScreen.scrollTop = messageScreen.scrollHeight;
+        }, 1500);
+    }
+
+    // Função de segurança básica para prevenir injeção incorreta de tags HTML no chat
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+
     window.onload = () => {
         loadTrack(currentTrackIndex);
+        // Garante que o scroll do chat inicie posicionado no fundo das mensagens iniciais
+        const messageScreen = document.getElementById('chat-messages-screen');
+        messageScreen.scrollTop = messageScreen.scrollHeight;
     };
     </script>
 

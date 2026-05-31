@@ -1,0 +1,308 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}iSnap - iDiva's Portal{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ========================================================= */
+    /* --- ANIMAÇÕES E HOVERS GLOBAIS --- */
+    /* ========================================================= */
+    .fun-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .fun-hover:hover { transform: scale(1.01); box-shadow: 5px 8px 0px rgba(0,0,0,0.15); }
+
+    /* ========================================================= */
+    /* --- CAIXA MESTRE LARANJA --- */
+    /* ========================================================= */
+    .orange-master-wrapper {
+        background-color: #ff8c00; 
+        margin: 50px auto; 
+        width: 95%; 
+        max-width: 900px; /* Alargado um pouco para valorizar o formato das imagens */
+        padding: 40px 20px; 
+        border-radius: 30px;
+        border: 4px solid #fff;
+        box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    /* ========================================================= */
+    /* --- CABEÇALHO DO ISNAP --- */
+    /* ========================================================= */
+    .isnap-header {
+        font-family: 'Titan One', cursive;
+        color: #fff;
+        font-size: 3rem;
+        text-shadow: 4px 4px 0px #572970;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        display: inline-block;
+    }
+
+    /* ========================================================= */
+    /* --- CONTAINER DO FEED --- */
+    /* ========================================================= */
+    .isnap-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 35px; 
+        align-items: center;
+        width: 100%;
+    }
+
+    /* ========================================================= */
+    /* --- CARD DE POSTAGEM (MOLDURA ROSA CLARO) --- */
+    /* ========================================================= */
+    .isnap-post-card {
+        width: 100%;
+        max-width: 700px; /* Tamanho ideal para visualização do formato 1042x527 */
+        background: #ffffff;
+        /* BORDA ROSA CLARO MANDATÓRIA */
+        border: 4px solid #ffcce6; 
+        border-radius: 25px;
+        padding: 16px;
+        box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-align: left;
+    }
+
+    /* Foto do Post (Ajustada para a proporção 1042x527 sem cortes) */
+    .post-image-container {
+        width: 100%;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid #ffcce6; 
+        background: #ffe6f2; /* Cor de fundo caso demore a carregar */
+    }
+
+    .post-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        /* Garante que a imagem renderize na proporção exata sem esticar ou achatar */
+        aspect-ratio: 1042 / 527; 
+        object-fit: cover;
+    }
+
+    /* ========================================================= */
+    /* --- BOTÕES DE AÇÃO (CURTIR E COMENTAR) --- */
+    /* ========================================================= */
+    .post-actions-bar {
+        display: flex;
+        gap: 15px;
+        border-top: 1px dashed #ffcce6;
+        padding-top: 12px;
+        margin-top: 5px;
+    }
+
+    .btn-action {
+        background: #ffe6f2;
+        border: 2px solid #ffb6c1;
+        border-radius: 20px;
+        padding: 6px 16px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #d12a87;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-action:hover {
+        background: #ffcce6;
+    }
+
+    .btn-action:active {
+        transform: scale(0.95);
+    }
+
+    .btn-action.liked {
+        background: #ff88cc;
+        color: #fff;
+        border-color: #d12a87;
+    }
+
+    /* ========================================================= */
+    /* --- SEÇÃO DE COMENTÁRIOS --- */
+    /* ========================================================= */
+    .comments-section {
+        background: #fff9fb;
+        border-radius: 15px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-family: Arial, sans-serif;
+        border: 1px solid #ffe6f2;
+    }
+
+    .comment-row {
+        word-break: break-word;
+        line-height: 1.4;
+    }
+
+    .comment-user {
+        font-weight: bold;
+        color: #ff66b2;
+    }
+
+    /* Input de novo comentário */
+    .comment-input-box {
+        display: flex;
+        gap: 6px;
+        margin-top: 5px;
+    }
+
+    .comment-input {
+        flex: 1;
+        border: 2px solid #ffcce6;
+        border-radius: 15px;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        outline: none;
+    }
+
+    .btn-send-comment {
+        background: #ffcce6;
+        border: 1px solid #ffb6c1;
+        color: #572970;
+        border-radius: 15px;
+        padding: 4px 14px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+        .orange-master-wrapper { padding: 20px 10px; border-radius: 15px; }
+        .isnap-header { font-size: 2.2rem; }
+        .isnap-post-card { padding: 12px; border-radius: 18px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="orange-master-wrapper" data-aos="fade-in" data-aos-duration="1000">
+        
+        <h1 class="isnap-header">📸 iSnap Feed</h1>
+
+        <div class="isnap-feed">
+
+            <div class="isnap-post-card fun-hover">
+                <div class="post-image-container">
+                    <img src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=1042&h=527&fit=crop" class="post-img" alt="iSnap Post 1">
+                </div>
+                
+                <div class="post-actions-bar">
+                    <button class="btn-action" onclick="toggleLike(this)">❤️ <span class="like-count">142</span></button>
+                    <button class="btn-action" onclick="focusComment(this)">💬 Comentar</button>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comment-row"><span class="comment-user">@SamPuckett:</span> Se não tiver um balde de asinhas de frango do lado, o look tá incompleto.</div>
+                    <div class="comment-row"><span class="comment-user">@FreddieB:</span> A iluminação da foto ficou excelente! Eu que calibrei. 😎</div>
+                    
+                    <div class="comment-input-box">
+                        <input type="text" class="comment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key === 'Enter') addComment(this)">
+                        <button class="btn-send-comment" onclick="addComment(this)">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="isnap-post-card fun-hover">
+                <div class="post-image-container">
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1042&h=527&fit=crop" class="post-img" alt="iSnap Post 2">
+                </div>
+                
+                <div class="post-actions-bar">
+                    <button class="btn-action" onclick="toggleLike(this)">❤️ <span class="like-count">89</span></button>
+                    <button class="btn-action" onclick="focusComment(this)">💬 Comentar</button>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comment-row"><span class="comment-user">@DivaY2K:</span> Menina, esse casaco é tudo!!! Onde comprou?</div>
+                    
+                    <div class="comment-input-box">
+                        <input type="text" class="comment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key === 'Enter') addComment(this)">
+                        <button class="btn-send-comment" onclick="addComment(this)">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="isnap-post-card fun-hover">
+                <div class="post-image-container">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=1042&h=527&fit=crop" class="post-img" alt="iSnap Post 3">
+                </div>
+                
+                <div class="post-actions-bar">
+                    <button class="btn-action" onclick="toggleLike(this)">❤️ <span class="like-count">256</span></button>
+                    <button class="btn-action" onclick="focusComment(this)">💬 Comentar</button>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comment-row"><span class="comment-user">@CarlyShay:</span> Gente, olha esse carinha de óculos, não aguento kkkkk mto fofo</div>
+                    <div class="comment-row"><span class="comment-user">@Gibbyyy:</span> GIBBY! 📣</div>
+                    
+                    <div class="comment-input-box">
+                        <input type="text" class="comment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key === 'Enter') addComment(this)">
+                        <button class="btn-send-comment" onclick="addComment(this)">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+    function toggleLike(btn) {
+        const countSpan = btn.querySelector('.like-count');
+        let currentLikes = parseInt(countSpan.innerText);
+        
+        if (btn.classList.contains('liked')) {
+            btn.classList.remove('liked');
+            countSpan.innerText = currentLikes - 1;
+        } else {
+            btn.classList.add('liked');
+            countSpan.innerText = currentLikes + 1;
+        }
+    }
+
+    function focusComment(btn) {
+        const postCard = btn.closest('.isnap-post-card');
+        const input = postCard.querySelector('.comment-input');
+        input.focus();
+    }
+
+    function addComment(element) {
+        const postCard = element.closest('.isnap-post-card');
+        const input = postCard.querySelector('.comment-input');
+        const commentsSection = postCard.querySelector('.comments-section');
+        const text = input.value.trim();
+
+        if (text === '') return;
+
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-row';
+        newComment.innerHTML = `<span class="comment-user">@Você:</span> ${escapeHTML(text)}`;
+        
+        const inputBox = postCard.querySelector('.comment-input-box');
+        commentsSection.insertBefore(newComment, inputBox);
+        
+        input.value = '';
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+    </script>
+
+{% endblock %}
