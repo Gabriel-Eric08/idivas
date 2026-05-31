@@ -1,126 +1,256 @@
-<div class="header-container">
+<div class="idivas-header-wrapper">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
-        .header-container {
-            width: 100%;
-            max-width: 1920px;   /* Largura máxima da sua nova imagem */
-            height: 200px;       /* Altura exata ajustada para 200px */
-            margin: 0 auto 20px auto;
+        /* --- 1. O CARD CENTRALIZADO --- */
+        .idivas-header-wrapper {
+            width: 95%;
+            max-width: 1300px;
+            margin: 20px auto 30px auto;
             position: relative;
-            
-            /* 1. ÁREA ROXA PROVISÓRIA (GRADIENTE ESTILO DIVA) */
-            background: linear-gradient(135deg, #8a2be2 0%, #4b00b3 100%);
-            
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Centraliza os botões verticalmente nos 200px de altura */
-            align-items: center;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: transparent;
+            border-radius: 30px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
         }
 
-        /* Texto guia de fundo (sumirá por baixo da imagem quando você a importar) */
-        .header-placeholder-text {
+        /* --- 2. A IMAGEM DE FUNDO --- */
+        .navbar-base-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- 3. CAMADA QUE FLUTUA SOBRE A IMAGEM --- */
+        .navbar-overlay {
             position: absolute;
-            top: 25%;
-            left: 50 Img;
-            transform: translate(-50%, -50%);
-            font-family: 'Titan One', cursive;
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            pointer-events: none;
-            text-align: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
         }
 
-        /* Container dos botões HTML */
+        /* --- 4. MINI FORMULÁRIO DE LOGIN (TOPO DIREITO) --- */
+        .mini-login-form {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .mini-login-form input {
+            width: 80px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 15px;
+            border: 1px solid #fff;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1b708f;
+            font-family: sans-serif;
+        }
+
+        .mini-login-form input::placeholder {
+            color: #2596be;
+        }
+
+        .mini-login-form button {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            border-radius: 15px;
+            background: #2596be;
+            color: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            font-family: 'Titan One', cursive;
+            transition: 0.2s;
+        }
+
+        .mini-login-form button:hover {
+            background: #ffff00;
+            color: #1b708f;
+            border-color: #ffff00;
+        }
+
+        /* --- 5. DATA E HORA (ALTURA MÉDIA, À DIREITA) --- */
+        .datetime-display {
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            transform: translateY(-50%); /* Centraliza perfeitamente no eixo Y */
+            background: rgba(37, 150, 190, 0.4); /* Fundo sutil com o tom azul */
+            padding: 4px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            font-family: 'Titan One', cursive;
+            font-size: 0.85rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            backdrop-filter: blur(2px);
+            pointer-events: none; /* Para não atrapalhar cliques na imagem */
+            letter-spacing: 0.5px;
+        }
+
+        /* --- 6. CONTAINER DOS BOTÕES - BASE --- */
         .navbar-real {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
             display: flex;
             justify-content: center;
-            gap: 25px; /* Espaçamento horizontal entre os botões */
+            gap: 15px; 
             width: 100%;
-            z-index: 10;
-            padding-top: 20px; /* Dá espaço em relação ao texto de guia superior */
         }
 
-        /* Botão Cápsula em CSS Puro (Estilo Gel / Web 2.0) */
+        /* --- 7. BOTÕES LILÁS PÍLULA --- */
         .nav-btn {
             display: inline-block;
-            padding: 10px 35px;
-            /* Degradê simulando o brilho das cápsulas originais */
-            background: linear-gradient(to bottom, #ff66cc 0%, #ff007f 50%, #cc0066 51%, #ff99cc 100%);
-            border: 3px solid #fff;
-            border-radius: 50px; /* Formato perfeito de cápsula arredondada */
+            padding: 3px 22px; 
+            
+            /* Degradê Lilás baseado no #d6a1e3 */
+            background: linear-gradient(to bottom, #f4e6fb 0%, #d6a1e3 45%, #b88fd0 100%);
+            border: 2px solid #fff;
+            border-radius: 30px; 
             
             color: #fff;
             font-family: 'Titan One', cursive;
-            font-size: 1.1rem;
+            font-size: 0.8rem;
             text-decoration: none;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000;
-            box-shadow: 0 4px 0 #800040, 0 6px 10px rgba(0,0,0,0.4);
+            text-shadow: 1px 1px 0px #000;
+            box-shadow: 0 2px 0 #8a5aa8, 0 4px 6px rgba(0,0,0,0.35);
             transition: all 0.2s ease-in-out;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Reflexo linear simulando plástico/vidro no topo do botão */
+        /* O "Brilhinho" */
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            right: 6px;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 3px #fff, 0 0 6px #fff; 
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Reflexo superior estilo vidro */
         .nav-btn::after {
             content: '';
             position: absolute;
-            top: 2px;
-            left: 10%;
-            width: 80%;
-            height: 35%;
+            top: 1px;
+            left: 5%;
+            width: 90%;
+            height: 45%;
             background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0));
-            border-radius: 50% 50% 0 0;
+            border-radius: 30px 30px 0 0;
             pointer-events: none;
+            z-index: 1;
         }
 
-        /* Animação Hover (Balanço + Brilho Neon) */
+        /* Animação Hover */
         .nav-btn:hover {
-            transform: scale(1.1) rotate(-2deg);
-            color: #ffff00;
-            border-color: #ffff00;
-            box-shadow: 0 4px 0 #800040, 0 0 15px #ff00ff;
+            transform: scale(1.05) rotate(-1deg);
+            color: #fff;
+            border-color: #caa1e8;
+            box-shadow: 0 2px 0 #8a5aa8, 0 0 10px #d6a1e3;
         }
 
-        /* Efeito de clique físico afundando o botão */
+        /* Efeito de clique */
         .nav-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0 #800040;
+            transform: translateY(2px);
+            box-shadow: 0 0px 0 #8a5aa8;
         }
 
-        /* RESPONSIVIDADE: Adaptação para telas de celulares e tablets */
+        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
-            .header-container { 
-                height: 140px; 
+            .mini-login-form {
+                top: 5px;
+                right: 5px;
+                padding: 4px 8px;
+                gap: 4px;
             }
-            .header-placeholder-text {
-                font-size: 0.9rem;
-                top: 20%;
+            .mini-login-form input {
+                width: 60px;
+                font-size: 0.65rem;
+                padding: 3px 5px;
             }
-            .nav-btn { 
-                padding: 6px 18px; 
-                font-size: 0.85rem; 
+            .mini-login-form button {
+                padding: 3px 6px;
+                font-size: 0.6rem;
+            }
+            .datetime-display {
+                right: 10px;
+                font-size: 0.65rem;
+                padding: 3px 8px;
             }
             .navbar-real {
-                gap: 10px;
-                padding-top: 15px;
+                bottom: 6px;
+                gap: 6px;
+            }
+            .nav-btn { 
+                padding: 2px 14px; 
+                font-size: 0.7rem; 
+            }
+            .nav-btn::before {
+                top: 2px;
+                right: 4px;
+                width: 3px;
+                height: 3px;
             }
         }
     </style>
 
-    <div class="header-placeholder-text">
-        FONDO PARA IMAGEM 1920x200
+    <img src="{{ url_for('static', filename='assets/navbar/navbar_img.png') }}" alt="iDiva's Header" class="navbar-base-img">
+
+    <div class="navbar-overlay">
+        
+        <form class="mini-login-form">
+            <input type="text" placeholder="User" required>
+            <input type="password" placeholder="Pass" required>
+            <button type="submit">GO</button>
+        </form>
+
+        <div class="datetime-display" id="live-clock">
+            Carregando...
+        </div>
+
+        <nav class="navbar-real">
+            <a href="/iblogs" class="nav-btn">IBLOGS</a>
+            <a href="/isnap" class="nav-btn">ISNAP</a>
+            <a href="/isongs" class="nav-btn">ISONGS</a>
+            <a href="/inews" class="nav-btn">INEWS</a>
+        </nav>
     </div>
 
-    <nav class="navbar-real">
-        <a href="/" class="nav-btn">Home</a>
-        <a href="/looks" class="nav-btn">Looks</a>
-        <a href="/songs" class="nav-btn">Songs</a>
-        <a href="/chat" class="nav-btn">Chat</a>
-    </nav>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('live-clock');
+            if (!clockElement) return;
+
+            const now = new Date();
+            
+            // Pega a data (ex: 30 mai 2026)
+            const optionsDate = { day: '2-digit', month: 'short', year: 'numeric' };
+            let dateString = now.toLocaleDateString('pt-BR', optionsDate);
+            
+            // Pega a hora (ex: 21:23:06)
+            let timeString = now.toLocaleTimeString('pt-BR');
+
+            clockElement.innerHTML = `${dateString.toUpperCase()} | ${timeString}`;
+        }
+
+        // Inicia o relógio
+        setInterval(updateClock, 1000);
+        updateClock(); // Chama imediatamente para não esperar 1 segundo
+    </script>
 </div>

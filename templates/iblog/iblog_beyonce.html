@@ -12,7 +12,7 @@
         justify-content: transform !important;
         width: 95% !important;
         max-width: 1300px !important;
-        margin: 30px auto 50px auto !important; /* Margem superior para desgrudar da navbar */
+        margin: 30px auto 50px auto !important;
     }
 
     .blog-container {
@@ -61,6 +61,155 @@
         color: rgba(255, 255, 255, 0.7);
         margin-top: 10px;
     }
+
+    /* =========================================
+       ESTILOS DO CARROSSEL DE PERFORMANCES 
+       ========================================= */
+    .carousel-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1290px; /* Largura solicitada */
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid rgba(214, 161, 227, 0.3); /* Bordinha rosa claro */
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        margin-bottom: 40px;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 50px;
+        box-sizing: border-box;
+        gap: 40px;
+    }
+
+    /* Lado Esquerdo: Texto */
+    .slide-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .slide-text h3 {
+        font-family: 'Titan One', cursive;
+        font-size: 2.5rem;
+        color: #d6a1e3; /* Rosa claro */
+        margin: 0 0 15px 0;
+        text-shadow: 2px 2px 0px #33004d;
+        line-height: 1.1;
+    }
+
+    .slide-text p {
+        font-family: sans-serif;
+        font-size: 1.1rem;
+        color: #e0e0e0;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Lado Direito: Vídeo */
+    .slide-video {
+        flex: 1.5; /* Ocupa um pouco mais de espaço que o texto */
+        width: 100%;
+        aspect-ratio: 16 / 9; /* Mantém proporção perfeita do YouTube */
+        background: #000;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .slide-video iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Botões de Navegação */
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(214, 161, 227, 0.8);
+        color: #fff;
+        border: 2px solid #fff;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .carousel-btn:hover {
+        background: #ffff00;
+        color: #33004d;
+        border-color: #33004d;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+
+    /* Indicadores (Bolinhas) */
+    .carousel-indicators {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+        background: rgba(255,255,255,0.4);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .indicator.active {
+        background: #d6a1e3;
+        box-shadow: 0 0 8px #d6a1e3;
+    }
+
+    /* Responsividade do Carrossel */
+    @media (max-width: 900px) {
+        .carousel-slide {
+            flex-direction: column;
+            padding: 30px 20px;
+            text-align: center;
+            gap: 20px;
+        }
+        .slide-text h3 {
+            font-size: 1.8rem;
+        }
+        .slide-text p {
+            font-size: 1rem;
+        }
+        .carousel-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -68,21 +217,151 @@
 <div class="blog-container">
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1000">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_1.png') }}" 
-             alt="Conteúdo Parte 1" 
-             class="animated-page-img">
+        <img src="{{ url_for('static', filename='assets/iblog/pag_1.png') }}" alt="Conteúdo Parte 1" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
-        <h2 class="transition-title">TOP ÁLBUNS DA SEMANA</h2>
+        <h2 class="transition-title">TOP ÁLBUNS</h2>
         <p class="transition-subtitle">> as músicas que estão derretendo o nosso player...</p>
     </div>
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_2.png') }}" 
-             alt="Conteúdo Parte 2" 
-             class="animated-page-img">
+        <img src="{{ url_for('static', filename='assets/iblog/pag_2.png') }}" alt="Conteúdo Parte 2" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">TÍTULO PROVISÓRIO 1</h2>
+        <p class="transition-subtitle">> texto provisório para você alterar depois...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='assets/iblog/pag_3.png') }}" alt="Conteúdo Parte 3" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">TÍTULO PROVISÓRIO 2</h2>
+        <p class="transition-subtitle">> texto provisório para você alterar depois...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='assets/iblog/pag_4.png') }}" alt="Conteúdo Parte 4" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">TÍTULO PROVISÓRIO 3</h2>
+        <p class="transition-subtitle">> texto provisório para você alterar depois...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='assets/iblog/pag_5.png') }}" alt="Conteúdo Parte 5" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">PERFORMANCES</h2>
+        <p class="transition-subtitle">> o palco é onde a verdadeira mágica acontece...</p>
+    </div>
+
+    <div class="carousel-wrapper" data-aos="fade-up" data-aos-duration="1200">
+        
+        <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+
+        <div class="carousel-track" id="videoTrack">
+            
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Performance 1</h3>
+                    <p>Uma apresentação inesquecível que marcou a carreira. Edite este texto para contar os detalhes dos vocais e da coreografia incrível desse momento.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/zhRp1mScBLI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Performance 2</h3>
+                    <p>Dominando o palco com uma energia surreal. A transição dessa música ao vivo elevou completamente o nível da turnê. Edite a descrição aqui.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/SDPITj1wlkg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Performance 3</h3>
+                    <p>Uma das eras mais visuais e bem entregues já vistas na música pop. Substitua este texto com o nome do prêmio ou do show onde isso aconteceu!</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/yw7HHSr5uyY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Performance 4</h3>
+                    <p>Vocais potentes e uma presença de palco de arrepiar. Deixe aqui sua análise sobre a banda ao vivo e os arranjos dessa faixa.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/9qEMX7BfB4s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="carousel-indicators" id="indicatorsContainer">
+            </div>
+
     </div>
 
 </div>
+
+<script>
+    let currentSlide = 0;
+    const track = document.getElementById('videoTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    const indicatorsContainer = document.getElementById('indicatorsContainer');
+
+    // Cria as bolinhas de indicação dinamicamente
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('indicator');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        indicatorsContainer.appendChild(dot);
+    });
+
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateCarousel() {
+        // Move a trilha
+        const offset = -currentSlide * 100;
+        track.style.transform = `translateX(${offset}%)`;
+
+        // Atualiza bolinhas
+        indicators.forEach(dot => dot.classList.remove('active'));
+        indicators[currentSlide].classList.add('active');
+
+        // Pausa os vídeos ao mudar de slide (limpando e recolocando o src do iframe)
+        slides.forEach(slide => {
+            const iframe = slide.querySelector('iframe');
+            if (iframe) {
+                let tempSrc = iframe.src;
+                iframe.src = tempSrc; 
+            }
+        });
+    }
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+</script>
 {% endblock %}
