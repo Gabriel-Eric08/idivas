@@ -1,0 +1,211 @@
+<div class="idivas-header-wrapper">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+        /* --- 1. O CARD CENTRALIZADO --- */
+        .idivas-header-wrapper {
+            width: 95%;
+            max-width: 1300px;
+            margin: 20px auto 30px auto;
+            position: relative;
+            background: transparent;
+            border-radius: 30px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
+        }
+
+        /* --- 2. A IMAGEM DE FUNDO --- */
+        .navbar-base-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- 3. CAMADA QUE FLUTUA SOBRE A IMAGEM --- */
+        .navbar-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+        }
+
+        /* --- 4. MINI FORMULÁRIO DE LOGIN (TOPO DIREITO) --- */
+        .mini-login-form {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .mini-login-form input {
+            width: 80px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 15px;
+            border: 1px solid #fff;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1b708f;
+            font-family: sans-serif;
+        }
+
+        .mini-login-form input::placeholder {
+            color: #2596be;
+        }
+
+        .mini-login-form button {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            border-radius: 15px;
+            background: #2596be;
+            color: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            font-family: 'Titan One', cursive;
+            transition: 0.2s;
+        }
+
+        .mini-login-form button:hover {
+            background: #ffff00;
+            color: #1b708f;
+            border-color: #ffff00;
+        }
+
+        /* Data e hora removidos */
+
+        /* --- 6. CONTAINER DOS BOTÕES - BASE --- */
+        .navbar-real {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px; 
+            width: 100%;
+        }
+        .nav-btn {
+            display: inline-block;
+            padding: 3px 22px; 
+            background-color:#2596be3;
+            background-image: linear-gradient(to bottom, #e8d9f7 0%,#2596be3 45%, #b88fd0 100%);
+            background-repeat: no-repeat;
+            border: 2px solid #fff;
+            border-radius: 30px; 
+
+            color: #fff;
+            font-family: 'Titan One', cursive;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px #000;
+            box-shadow: 0 2px 0 #8a5aa8, 0 4px 6px rgba(0,0,0,0.35);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+
+        /* O "Brilhinho" */
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            right: 6px;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 3px #fff, 0 0 6px #fff; 
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Reflexo superior estilo vidro */
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 5%;
+            width: 90%;
+            height: 45%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0));
+            border-radius: 30px 30px 0 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animação Hover */
+        .nav-btn:hover {
+            transform: scale(1.05) rotate(-1deg);
+            color: #fff;
+            border-color: #caa1e8;
+            box-shadow: 0 2px 0 #8a5aa8, 0 0 10px#2596be3;
+        }
+
+        /* Efeito de clique */
+        .nav-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 0px 0 #8a5aa8;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .mini-login-form {
+                top: 5px;
+                right: 5px;
+                padding: 4px 8px;
+                gap: 4px;
+            }
+            .mini-login-form input {
+                width: 60px;
+                font-size: 0.65rem;
+                padding: 3px 5px;
+            }
+            .mini-login-form button {
+                padding: 3px 6px;
+                font-size: 0.6rem;
+            }
+            /* Regras responsivas para data/hora removidas */
+            .navbar-real {
+                bottom: 6px;
+                gap: 6px;
+            }
+            .nav-btn { 
+                padding: 2px 14px; 
+                font-size: 0.7rem; 
+            }
+            .nav-btn::before {
+                top: 2px;
+                right: 4px;
+                width: 3px;
+                height: 3px;
+            }
+        }
+    </style>
+
+    <img src="{{ url_for('static', filename='media/navbar/navbar_lady_gaga.png') }}" alt="iDiva's Header" class="navbar-base-img">
+
+    <div class="navbar-overlay">
+        
+        <form class="mini-login-form">
+            <input type="text" placeholder="User" required>
+            <input type="password" placeholder="Pass" required>
+            <button type="submit">GO</button>
+        </form>
+
+        <!-- Display de data/hora removido -->
+
+        <nav class="navbar-real">
+            <a href="/iblogs" class="nav-btn">IBLOGS</a>
+            <a href="/isnap" class="nav-btn">ISNAP</a>
+            <a href="/isongs" class="nav-btn">ISONGS</a>
+            <a href="/inews" class="nav-btn">INEWS</a>
+        </nav>
+    </div>
+
+    <!-- Script de relógio removido -->
+</div>

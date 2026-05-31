@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-isong_bp = Blueprint('isong', __name__, url_prefix='/isong')
+isong_bp = Blueprint('isongs', __name__, url_prefix='/isongs')
 
 @isong_bp.route('/')
 def isong():

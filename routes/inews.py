@@ -2,6 +2,6 @@ from flask import Blueprint, render_template
 
 inews_bp = Blueprint('inews', __name__, url_prefix='/inews')
 
-@inews_bp.route('/beyonce')
-def inews_beyonce():
-    return render_template('pages/inews/beyonce.html')
+@inews_bp.route('/')
+def inews_index():
+    return render_template('pages/inews/index.html')

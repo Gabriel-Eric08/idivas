@@ -117,6 +117,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: top;
     }
 
     .float-el {
@@ -597,15 +598,27 @@
                             <div class="carousel-inner" style="height: 100%;">
                                 
                                 <div class="carousel-item active" style="height: 100%;">
-                                    <img src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=800&q=80" class="carousel-img-custom" alt="Look 1">
+                                    <img src="{{ url_for('static', filename='media/home/beyonce/beyonce_1.jpeg') }}" class="carousel-img-custom" alt="Beyoncé 1">
                                 </div>
                                 
                                 <div class="carousel-item" style="height: 100%;">
-                                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80" class="carousel-img-custom" alt="Look 2">
+                                    <img src="{{ url_for('static', filename='media/home/beyonce/beyonce_2.jpeg') }}" class="carousel-img-custom" alt="Beyoncé 2">
                                 </div>
                                 
                                 <div class="carousel-item" style="height: 100%;">
-                                    <img src="https://images.unsplash.com/photo-1550614000-4b95d466f28b?w=800&q=80" class="carousel-img-custom" alt="Look 3">
+                                    <img src="{{ url_for('static', filename='media/home/beyonce/beyonce_3.jpeg') }}" class="carousel-img-custom" alt="Beyoncé 3">
+                                </div>
+
+                                <div class="carousel-item" style="height: 100%;">
+                                    <img src="{{ url_for('static', filename='media/home/beyonce/beyonce_4.jpeg') }}" class="carousel-img-custom" alt="Beyoncé 4">
+                                </div>
+
+                                <div class="carousel-item" style="height: 100%;">
+                                    <img src="{{ url_for('static', filename='media/home/rihanna/rihanna_1.jpeg') }}" class="carousel-img-custom" alt="Rihanna 1">
+                                </div>
+
+                                <div class="carousel-item" style="height: 100%;">
+                                    <img src="{{ url_for('static', filename='media/home/rihanna/rihanna_2.jpeg') }}" class="carousel-img-custom" alt="Rihanna 2">
                                 </div>
 
                             </div>
