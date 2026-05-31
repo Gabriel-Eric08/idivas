@@ -34,7 +34,31 @@
         margin: 0;
         color: #fff;
     }
+    .isongs-master-wrapper {
+    background-color: #181818;
+    color: #ffffff;
 
+    width: 100%;
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    min-height: 100vh;
+    padding: 40px;
+
+    box-sizing: border-box;
+    text-align: left;
+
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}   
+    .isongs-master-wrapper {
+    width: 100%;
+    max-width: 1270px; /* ajuste fino */
+    margin: 0 auto;
+    background: #181818;
+    padding: 40px;
+}
     /* Cabeçalhos de Seção */
     .isongs-section-header {
         display: flex;
@@ -79,6 +103,13 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+    .isongs-section {
+    width: 100%;
+    background: #222222;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
 
     /* --- ARTISTAS POPULARES (CÍRCULOS) --- */
     .artist-card {
@@ -95,6 +126,11 @@
         object-fit: cover;
         margin-bottom: 12px;
         box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        transition: transform 0.2s ease;
+    }
+
+    .artist-card:hover .artist-circle {
+        transform: scale(1.04);
     }
 
     .artist-name {
@@ -119,13 +155,13 @@
         text-align: left;
         cursor: pointer;
         padding: 12px;
-        background: #222222; /* Cinza levemente mais claro para destacar os cards */
+        background: transparent;
         border-radius: 8px;
         transition: background-color 0.3s ease;
     }
 
     .album-card:hover {
-        background-color: #2a2a2a;
+        background-color: rgba(255,255,255,0.08);
     }
 
     .album-square {
@@ -157,28 +193,29 @@
 
     /* --- SEÇÃO DE MÚSICAS EXPANDIDA --- */
     .tracks-expansion-panel {
-        display: none;
-        background: #222222; /* Bloco cinza sólido para as músicas */
-        border-radius: 8px;
-        padding: 30px;
-        margin-top: 40px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-        animation: fadeIn 0.5s ease;
-    }
+    width: 100%;
+    display: none;
+    background: #222222;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
 
     .panel-content {
         display: flex;
         gap: 32px;
+        align-items: flex-start;
     }
 
     .panel-cover-side {
         flex: 0 0 auto;
-        width: 200px;
+        width: 220px;
     }
 
     .panel-album-cover {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
         border-radius: 8px;
         box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         object-fit: cover;
@@ -193,41 +230,8 @@
 
     .panel-list-side {
         flex: 1;
-    }
-
-    .track-table {
         width: 100%;
-        border-collapse: collapse;
     }
-
-    .track-table th {
-        color: #b3b3b3;
-        font-size: 0.85rem;
-        font-weight: 400;
-        text-transform: uppercase;
-        border-bottom: 1px solid #333333;
-        padding-bottom: 12px;
-        text-align: left;
-    }
-
-    .track-row {
-        border-bottom: 1px solid transparent;
-        transition: background-color 0.2s ease;
-        cursor: pointer;
-    }
-
-    .track-row:hover {
-        background-color: rgba(255,255,255,0.08);
-    }
-
-    .track-row td {
-        padding: 12px 16px;
-        font-size: 0.95rem;
-        color: #ffffff;
-    }
-
-    .track-num { width: 40px; color: #b3b3b3; }
-    .track-duration { text-align: right; width: 60px; color: #b3b3b3; }
 
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(15px); }
@@ -237,7 +241,10 @@
     @media (max-width: 768px) {
         .panel-content { flex-direction: column; }
         .isongs-master-wrapper { padding: 20px; }
+        .panel-cover-side { width: 100%; text-align: center; }
+        .panel-album-cover { width: 200px; height: 200px; }
     }
+
     .isongs-section {
         background: #222222;
         border-radius: 12px;
@@ -250,18 +257,6 @@
         border-radius: 12px;
         padding: 16px 0 0 0;
     }
-
-    .album-card {
-        background: transparent;
-    }
-
-    .album-card:hover {
-        background: rgba(255,255,255,0.08);
-    }
-    .tracks-expansion-panel {
-        background: #222222;
-        border-radius: 12px;
-    }
 </style>
 {% endblock %}
 
@@ -271,8 +266,9 @@
         <div class="isongs-header-box">
             <h1 class="isongs-main-title">ISONGS</h1>
         </div>
+
         <div class="isongs-section">
-            <div class="isongs-section-header">
+            <div class="isongs-section-header" style="margin-top: 0;">
                 <h2 class="isongs-section-title">Artistas populares</h2>
                 <a href="#" class="isongs-show-all">Mostrar tudo</a>
             </div>
@@ -281,13 +277,13 @@
 
         <div class="isongs-section">
             <div class="isongs-section-header">
-                <h2 class="isongs-section-title">Singles e álbuns que todo mundo gosta</h2>
+                <h2 class="isongs-section-title" id="albums-section-title">Escolha uma artista para ver os álbuns</h2>
                 <a href="#" class="isongs-show-all">Mostrar tudo</a>
             </div>
             <div class="isongs-row" id="albums-container"></div>
         </div>
 
-        <div class="isongs-section">
+        <div class="isongs-section" style="background: transparent; padding: 0;">
             <div class="tracks-expansion-panel" id="tracks-panel">
                 <div class="panel-content" id="panel-content-target"></div>
             </div>
@@ -295,118 +291,141 @@
     </div>
 
     <script>
+    // Banco de Dados Dinâmico estruturado para carregar por artista
     const iSongsData = {
         artists: [
-            { name: "Henrique & Juliano", image: "https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=300" },
-            { name: "Diego & Victor Hugo", image: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?w=300" },
-            { name: "Grupo Menos É Mais", image: "https://images.unsplash.com/photo-1594411139151-5b9b7e754e1a?w=300" },
-            { name: "Jorge & Mateus", image: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=300" },
-            { name: "Zé Neto & Cristiano", image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300" },
-            { name: "Matheus & Kauan", image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300" }
+            { id: "beyonce", name: "Beyoncé", image: "{{ url_for('static', filename='media/perfil/beyonce.png') }}" }, // Caminho da sua pasta ou url web
+            { id: "rihanna", name: "Rihanna", image: "{{ url_for('static', filename='media/perfil/rihanna.png') }}" }, // Usei placeholder, se tiver local troque pela tag url_for
+            { id: "ladygaga", name: "Lady Gaga", image: "{{ url_for('static', filename='media/perfil/ladygaga.png') }}" }
         ],
-        albums: [
-            {
-                id: "album_1",
-                title: "White Noise (Sleep & Relaxation)",
-                artist: "Sleepy John",
-                image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400",
-                tracks: [
-                    { number: 1, title: "Chuva Suave de Outono", duration: "3:45" },
-                    { number: 2, title: "Ondas do Mar Profundo", duration: "4:12" },
-                    { number: 3, title: "Vento nas Montanhas", duration: "5:00" }
-                ]
-            },
-            {
-                id: "album_2",
-                title: "Manifesto Musical 2",
-                artist: "Henrique & Juliano",
-                image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400",
-                tracks: [
-                    { number: 1, title: "Traumatizei", duration: "2:55" },
-                    { number: 2, title: "Arranhão", duration: "3:14" },
-                    { number: 3, title: "A Maior Saudade", duration: "3:01" }
-                ]
-            },
-            {
-                id: "album_3",
-                title: "MAYHEM",
-                artist: "Lady Gaga",
-                image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
-                tracks: [
-                    { number: 1, title: "Free Woman", duration: "3:11" },
-                    { number: 2, title: "Alice", duration: "2:57" },
-                    { number: 3, title: "Stupid Love", duration: "3:13" }
-                ]
-            },
-            {
-                id: "album_4",
-                title: "333",
-                artist: "Matuê",
-                image: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=400",
-                tracks: [
-                    { number: 1, title: "Filho da Noite", duration: "2:40" },
-                    { number: 2, title: "Vampiro", duration: "3:22" }
-                ]
-            }
-        ]
+        albums: {
+            beyonce: [
+                {
+                    id: "dangerously_in_love",
+                    title: "Dangerously in Love",
+                    artist: "Beyoncé",
+                    image: "{{ url_for('static', filename='media/jornal/dgil.png') }}",
+                    // ABAIXO VOCÊ COLA APENAS O LINK DO SRC DO IFRAME DO SPOTIFY EMBED (lembrando de usar o formato /embed/)
+                    spotifyUrl: "https://open.spotify.com/embed/album/06v9eHnqhMK2tbM2Iz3p0Y?utm_source=generator"
+                },
+                {
+                    id: "bday",
+                    title: "B'Day",
+                    artist: "Beyoncé",
+                    image: "{{ url_for('static', filename='media/jornal/bday.png') }}",
+                    spotifyUrl: "https://open.spotify.com/embed/album/77eZ5eMEh3U0KWricrbevO?utm_source=generator" // Cole aqui o link correspondente
+                }
+            ],
+            rihanna: [
+                {
+                    id: "anti",
+                    title: "ANTI",
+                    artist: "Rihanna",
+                    image: "{{ url_for('static', filename='media/jornal/anti.png') }}",
+                    spotifyUrl: "https://open.spotify.com/embed/album/48i37aZTC1prDr4EcpQeEa?utm_source=generator" // Cole aqui o link correspondente
+                },
+                {
+                    id: "music_of_the_sun",
+                    title: "Music of The Sun",
+                    artist: "Rihanna",
+                    image: "{{ url_for('static', filename='media/jornal/mots.png') }}",
+                    spotifyUrl: "https://open.spotify.com/embed/album/4FyGpObwABjn0o8Tdp7AZz?utm_source=generator" // Cole aqui o link correspondente
+                }
+            ],
+            ladygaga: [
+                {
+                    id: "born_this_way",
+                    title: "Born This Way",
+                    artist: "Lady Gaga",
+                    image: "{{ url_for('static', filename='media/jornal/btw.png') }}",
+                    spotifyUrl: "https://open.spotify.com/embed/album/6LY3AerY6KNGOPsNPL63Kk?utm_source=generator" // Cole aqui o link correspondente
+                },
+                {
+                    id: "the_fame",
+                    title: "The Fame",
+                    artist: "Lady Gaga",
+                    image: "{{ url_for('static', filename='media/jornal/tfame.png') }}",
+                    spotifyUrl: "https://open.spotify.com/embed/album/1qwlxZTNLe1jq3b0iidlue?utm_source=generator" // Cole aqui o link correspondente
+                }
+            ]
+        }
     };
 
+    // 1. Renderiza as 3 artistas principais
     function renderArtists() {
         const container = document.getElementById('artists-container');
         container.innerHTML = iSongsData.artists.map(artist => `
-            <div class="artist-card">
-                <img src="${artist.image}" class="artist-circle" alt="${artist.name}">
+            <div class="artist-card" onclick="selectArtist('${artist.id}', '${artist.name}')">
+                <img src="${artist.image}" class="artist-circle" alt="${artist.name}" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300'">
                 <div class="artist-name">${artist.name}</div>
                 <div class="artist-badge">Artista</div>
             </div>
         `).join('');
     }
 
-    function renderAlbums() {
-        const container = document.getElementById('albums-container');
-        container.innerHTML = iSongsData.albums.map(album => `
-            <div class="album-card" onclick="expandAlbum('${album.id}')">
-                <img src="${album.image}" class="album-square" alt="${album.title}">
+    // 2. Evento ao clicar na artista: Mostra seus respectivos álbuns
+    function selectArtist(artistId, artistName) {
+        const titleContainer = document.getElementById('albums-section-title');
+        const albumsContainer = document.getElementById('albums-container');
+        const panel = document.getElementById('tracks-panel');
+        
+        // Esconde o painel de players antigo ao mudar de artista
+        panel.style.display = 'none';
+
+        titleContainer.innerText = `Álbuns de ${artistName}`;
+        
+        const artistAlbums = iSongsData.albums[artistId] || [];
+
+        if (artistAlbums.length === 0) {
+            albumsContainer.innerHTML = `<p style="padding-left: 16px; color: #b3b3b3;">Nenhum álbum cadastrado.</p>`;
+            return;
+        }
+
+        albumsContainer.innerHTML = artistAlbums.map(album => `
+            <div class="album-card" onclick="expandSpotifyPlayer('${artistId}', '${album.id}')">
+                <img src="${album.image}" class="album-square" alt="${album.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
                 <div class="album-title">${album.title}</div>
                 <div class="album-artist">${album.artist}</div>
             </div>
         `).join('');
     }
 
-    function expandAlbum(albumId) {
+    // 3. Evento ao clicar no álbum: Expande o player do Spotify correspondente
+    function expandSpotifyPlayer(artistId, albumId) {
         const panel = document.getElementById('tracks-panel');
         const target = document.getElementById('panel-content-target');
-        const album = iSongsData.albums.find(a => a.id === albumId);
+        
+        const artistAlbums = iSongsData.albums[artistId];
+        const album = artistAlbums ? artistAlbums.find(a => a.id === albumId) : null;
         
         if (!album) return;
 
-        const trackRows = album.tracks.map(track => `
-            <tr class="track-row">
-                <td class="track-num">${track.number}</td>
-                <td>${track.title}</td>
-                <td class="track-duration">${track.duration}</td>
-            </tr>
-        `).join('');
+        // Se o link do spotify estiver vazio no objeto, mostraremos uma mensagem amigável temporária
+        const iframeContent = album.spotifyUrl ? `
+            <iframe style="border-radius:12px;" 
+                src="${album.spotifyUrl}" 
+                width="100%" 
+                height="352" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+        ` : `
+            <div style="background: #333; padding: 40px; border-radius: 12px; text-align: center; color: #b3b3b3;">
+                <p style="margin: 0; font-size: 1.1rem; font-weight: bold;">Player indisponível</p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9rem;">Insira o link do Spotify para este álbum no JavaScript.</p>
+            </div>
+        `;
 
         target.innerHTML = `
             <div class="panel-cover-side">
-                <img src="${album.image}" class="panel-album-cover" alt="${album.title}">
+                <img src="${album.image}" class="panel-album-cover" alt="${album.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
                 <h3 class="panel-album-title">${album.title}</h3>
                 <p style="color: #b3b3b3; margin:0; font-size:0.9rem;">${album.artist}</p>
             </div>
             <div class="panel-list-side">
-                <table class="track-table">
-                    <thead>
-                        <tr>
-                            <th class="track-num">#</th>
-                            <th>TÍTULO</th>
-                            <th class="track-duration"><svg width="16" height="16" viewBox="0 0 16 16" fill="#b3b3b3"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9-3v3h3v1.5H7.5V5H9z"/></svg></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${trackRows}
-                    </tbody>
-                </table>
+                ${iframeContent}
             </div>
         `;
 
@@ -414,9 +433,9 @@
         panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
+    // Inicialização da página
     window.onload = () => {
         renderArtists();
-        renderAlbums();
     };
     </script>
 {% endblock %}

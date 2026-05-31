@@ -10,7 +10,12 @@
     
     /* Container principal da área de notícias */
     .inews-master-wrapper {
-        background-color: #ff8c00; /* Mantendo a identidade laranja */
+        /* Fundo roxo repetitivo atualizado para manter a consistência com a Home */
+        background-image: url("{{ url_for('static', filename='media/background/background_roxo.png') }}");
+        background-repeat: repeat-y;
+        background-position: top center;
+        background-size: 100% auto;
+        
         margin: 50px auto; 
         width: 95%; 
         max-width: 1200px; 
@@ -20,30 +25,30 @@
         box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
     }
 
-    /* Caixa de texto ACIMA da imagem (Estilo 2D Fundo Preto) */
+    /* Caixa de texto ACIMA da imagem */
     .inews-text-header {
-        background-color: #000000; /* Fundo preto sólido */
-        border: 4px solid #333333; /* Borda reta e escura dando o aspecto 2D/Retro */
+        background-color: #000000; 
+        border: 4px solid #333333; 
         border-radius: 10px;
         padding: 20px 30px;
         margin-bottom: 20px;
         text-align: center;
-        box-shadow: inset 0 0 15px rgba(0,0,0,1); /* Sombra interna para dar um leve ar de tela afundada */
+        box-shadow: inset 0 0 15px rgba(0,0,0,1); 
     }
 
     .inews-title {
-        font-family: 'VT323', monospace; /* Fonte digital/retro */
-        color: #00ff00; /* Verde neon */
+        font-family: 'VT323', monospace; 
+        color: #00ff00; 
         font-size: 3rem;
         margin-bottom: 5px;
         text-transform: uppercase;
-        text-shadow: 0 0 5px #00ff00; /* Efeito de brilho */
+        text-shadow: 0 0 5px #00ff00; 
         line-height: 1;
     }
 
     .inews-desc {
         font-family: 'VT323', monospace;
-        color: #ffffff; /* Texto em branco para contrastar no fundo preto */
+        color: #ffffff; 
         font-size: 1.5rem;
         line-height: 1.2;
         margin: 0;
@@ -64,21 +69,21 @@
     .inews-img {
         width: 100%;
         height: auto;
-        aspect-ratio: 16 / 9; /* Força a proporção 1920x1080 em qualquer tela */
+        aspect-ratio: 16 / 9; 
         object-fit: cover;
         display: block;
     }
 
     /* Customizando as setas do carrossel */
     .carousel-control-prev, .carousel-control-next {
-        width: 8%; /* Área de clique nas laterais */
+        width: 8%; 
     }
 
     .custom-arrow-btn {
         background-color: #000;
         width: 50px;
         height: 50px;
-        border-radius: 5px; /* Deixei mais quadrado para combinar com o 2D */
+        border-radius: 5px; 
         border: 3px solid #333;
         display: flex;
         align-items: center;
@@ -90,7 +95,7 @@
     .carousel-control-prev:hover .custom-arrow-btn, 
     .carousel-control-next:hover .custom-arrow-btn {
         transform: scale(1.05);
-        border-color: #00ff00; /* Borda brilha verde ao passar o mouse */
+        border-color: #00ff00; 
     }
 
     /* ========================================================= */
@@ -117,44 +122,20 @@
             
             <div class="carousel-inner">
                 
-                <div class="carousel-item active">
-                    
-                    <div class="inews-text-header">
-                        <h2 class="inews-title">BOMBA DO DIA!</h2>
-                        <p class="inews-desc">Spencer acidentalmente incendiou a cozinha DE NOVO tentando fazer tacos de espaguete. Veja as fotos exclusivas do desastre!</p>
+                {% for imagem in imagens_jornal %}
+                    <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                        
+                        <div class="inews-text-header">
+                            <h2 class="inews-title">BOMBA DO DIA #{{ loop.index }}</h2>
+                            <p class="inews-desc">Deslize para ver as últimas fofocas exclusivas e acontecimentos bombásticos!</p>
+                        </div>
+
+                        <div class="inews-image-wrapper">
+                            <img src="{{ url_for('static', filename='media/jornal/' ~ imagem) }}" class="inews-img" alt="Notícia {{ loop.index }}">
+                        </div>
+
                     </div>
-
-                    <div class="inews-image-wrapper">
-                        <img src="{{ url_for('static', filename='media/inews/pag_1.jpg') }}" class="inews-img" alt="Notícia 1">
-                    </div>
-
-                </div>
-
-                <div class="carousel-item">
-                    
-                    <div class="inews-text-header">
-                        <h2 class="inews-title">NOVO QUADRO NO iCARLY?</h2>
-                        <p class="inews-desc">Sam e Carly estão pensando em um novo segmento envolvendo um porco de pelúcia e muito chantilly. O que será que vem por aí?</p>
-                    </div>
-
-                    <div class="inews-image-wrapper">
-                        <img src="{{ url_for('static', filename='media/inews/pag_2.jpg') }}" class="inews-img" alt="Notícia 2">
-                    </div>
-
-                </div>
-
-                <div class="carousel-item">
-                    
-                    <div class="inews-text-header">
-                        <h2 class="inews-title">O SEGREDO DE FREDDIE</h2>
-                        <p class="inews-desc">Vasculhamos o laptop de tecnologia do Freddie e vocês não vão acreditar nos arquivos ocultos que achamos na lixeira...</p>
-                    </div>
-
-                    <div class="inews-image-wrapper">
-                        <img src="{{ url_for('static', filename='media/inews/pag_3.jpg') }}" class="inews-img" alt="Notícia 3">
-                    </div>
-
-                </div>
+                {% endfor %}
 
             </div>
 
@@ -172,6 +153,7 @@
                 <span class="visually-hidden">Próximo</span>
             </button>
 
-        </div> </div>
+        </div> 
+    </div>
 
 {% endblock %}
