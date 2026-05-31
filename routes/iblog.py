@@ -6,6 +6,6 @@ iblog_bp = Blueprint('iblog', __name__, url_prefix='/iblog')
 def iblog_beyonce():
     return render_template('pages/iblog/beyonce.html')
 
-@iblog_bp.route('/ladygaga')
+@iblog_bp.route('/lady_gaga')
 def iblog_ladygaga():
     return render_template('pages/iblog/lady_gaga.html')

@@ -200,11 +200,29 @@
         <!-- Display de data/hora removido -->
 
         <nav class="navbar-real">
-            <a href="/iblogs" class="nav-btn">IBLOGS</a>
+            <a href="/" class="nav-btn">HOME</a>
+            <button type="button" class="nav-btn" data-bs-toggle="modal" data-bs-target="#iblogModal">IBLOGS</button>
             <a href="/isnap" class="nav-btn">ISNAP</a>
             <a href="/isongs" class="nav-btn">ISONGS</a>
             <a href="/inews" class="nav-btn">INEWS</a>
         </nav>
+    </div>
+
+    <!-- iBlog modal -->
+    <div class="modal fade" id="iblogModal" tabindex="-1" aria-labelledby="iblogModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: rgba(24,24,24,0.95); color: #fff; border-radius: 12px;">
+          <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <h5 class="modal-title" id="iblogModalLabel">iBlog - Escolha a Diva</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body" style="display:flex; flex-direction:column; gap:12px;">
+            <a href="/iblog/beyonce" class="nav-btn" style="width:100%; text-align:center;">Beyonce</a>
+            <a href="/iblog/lady_gaga" class="nav-btn" style="width:100%; text-align:center;">Lady Gaga</a>
+            <a href="/iblog/rihanna" class="nav-btn" style="width:100%; text-align:center;">Rihanna</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Script de relógio removido -->
