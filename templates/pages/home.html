@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'layouts/base.html' %}
 
 {% block title %}Página Inicial - iDiva's Portal{% endblock %}
 
@@ -159,7 +159,7 @@
         position: absolute;
         top: -15px; left: -15px; bottom: -15px; right: -15px;
         border-radius: 50%;
-        background-image: url('{{ url_for('static', filename='assets/image_2.png') }}');
+        background-image: url('{{ url_for('static', filename='media/image_2.png') }}');
         background-size: cover;
         background-position: center;
         opacity: 0.6;
@@ -660,7 +660,7 @@
         { 
             title: "Crazy in Love", 
             artist: "Beyonce", 
-            src: "{{ url_for('static', filename='assets/musics/beyonce/crazy_in_love.mp3') }}" 
+            src: "{{ url_for('static', filename='media/musics/beyonce/crazy_in_love.mp3') }}" 
         },
         { 
             title: "Track 2", 

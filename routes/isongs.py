@@ -4,4 +4,4 @@ isong_bp = Blueprint('isong', __name__, url_prefix='/isong')
 
 @isong_bp.route('/')
 def isong():
-    return render_template('isongs.html')
+    return render_template('pages/isongs/index.html')

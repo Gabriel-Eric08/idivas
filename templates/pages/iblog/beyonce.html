@@ -1,4 +1,4 @@
-{% extends 'base_beyonce.html' %}
+{% extends 'layouts/base_beyonce.html' %}
 
 {% block title %}Top Álbuns - iDiva's Portal{% endblock %}
 
@@ -304,7 +304,7 @@
 <div class="blog-container">
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1000">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_1.png') }}" alt="Conteúdo Parte 1" class="animated-page-img">
+        <img src="{{ url_for('static', filename='media/iblog/pag_1.png') }}" alt="Conteúdo Parte 1" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
@@ -313,7 +313,7 @@
     </div>
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_2.png') }}" alt="Conteúdo Parte 2" class="animated-page-img">
+        <img src="{{ url_for('static', filename='media/iblog/pag_2.png') }}" alt="Conteúdo Parte 2" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
@@ -322,7 +322,7 @@
     </div>
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_3.png') }}" alt="Conteúdo Parte 3" class="animated-page-img">
+        <img src="{{ url_for('static', filename='media/iblog/pag_3.png') }}" alt="Conteúdo Parte 3" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
@@ -331,7 +331,7 @@
     </div>
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_4.png') }}" alt="Conteúdo Parte 4" class="animated-page-img">
+        <img src="{{ url_for('static', filename='media/iblog/pag_4.png') }}" alt="Conteúdo Parte 4" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
@@ -340,7 +340,7 @@
     </div>
 
     <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
-        <img src="{{ url_for('static', filename='assets/iblog/pag_5.png') }}" alt="Conteúdo Parte 5" class="animated-page-img">
+        <img src="{{ url_for('static', filename='media/iblog/pag_5.png') }}" alt="Conteúdo Parte 5" class="animated-page-img">
     </div>
 
     <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
@@ -409,15 +409,15 @@
     <div class="style-selector-wrapper" data-aos="fade-up" data-aos-duration="1200">
         
         <div class="style-buttons-container">
-            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_1.mp4') }}', this)">Look 1</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_2.mp4') }}', this)">Look 2</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_3.mp4') }}', this)">Look 3</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_4.mp4') }}', this)">Look 4</button>
+            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='media/videos/iblog/beyonce/look_1.mp4') }}', this)">Look 1</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/videos/iblog/beyonce/look_2.mp4') }}', this)">Look 2</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/videos/iblog/beyonce/look_3.mp4') }}', this)">Look 3</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/videos/iblog/beyonce/look_4.mp4') }}', this)">Look 4</button>
         </div>
 
         <div class="video-paint-container">
             <video id="mainVerticalVideo" autoplay loop muted playsinline>
-                <source src="{{ url_for('static', filename='assets/videos/iblog/beyonce/look_1.mp4') }}" type="video/mp4">
+                <source src="{{ url_for('static', filename='media/videos/iblog/beyonce/look_1.mp4') }}" type="video/mp4">
             </video>
         </div>
 

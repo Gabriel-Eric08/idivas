@@ -40,13 +40,36 @@
         }
 
         /* Bloco para CSS extra de outras páginas não poluir o base */
+        body {
+        background: linear-gradient(180deg, #0b2611 0%, #000000 100%) !important;
+        background-attachment: fixed !important; /* Mantém o fundo fixo ao rolar a página */
+    }
+
+    /* Força o conteúdo a se comportar como uma coluna centralizada */
+    .page-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: transform !important;
+        width: 95% !important;
+        max-width: 1300px !important;
+        margin: 30px auto 50px auto !important;
+    }
+
+    .blog-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
         {% block extra_css %}{% endblock %}
+    
     </style>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     <div class="main-wrapper">
-        {% include 'navbar.html' %}
+        {% include 'includes/navbar_beyonce.html' %}
 
         <main class="page-content">
             {% block content %}{% endblock %}
