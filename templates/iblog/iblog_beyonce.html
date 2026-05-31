@@ -210,6 +210,93 @@
             font-size: 1rem;
         }
     }
+    /* =========================================
+       ESCOLHA SEU ESTILO (INTERATIVO)
+       ========================================= */
+    .style-selector-wrapper {
+        width: 100%;
+        max-width: 900px; /* Largura controlada para o layout ficar elegante */
+        margin: 0 auto 50px auto;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid rgba(214, 161, 227, 0.5);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px; /* Espaço entre os botões e o vídeo */
+    }
+
+    /* LADO ESQUERDO: Botões */
+    .style-buttons-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .btn-look {
+        padding: 15px 25px;
+        background: linear-gradient(180deg, #333 0%, #111 100%);
+        border: 2px solid #d6a1e3;
+        color: #d6a1e3;
+        font-family: 'VT323', monospace;
+        font-size: 1.8rem;
+        border-radius: 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.2s ease;
+        box-shadow: 0 6px 0 #5c3a63; /* Estilo de botão "físico" */
+        text-align: center;
+    }
+
+    .btn-look:hover {
+        background: #d6a1e3;
+        color: #000;
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 #5c3a63;
+    }
+
+    /* Botão selecionado (afundado) */
+    .btn-look.active {
+        background: #d6a1e3;
+        color: #000;
+        transform: translateY(6px);
+        box-shadow: 0 0px 0 #5c3a63;
+        border-color: #fff;
+    }
+
+    /* LADO DIREITO: Vídeo Vertical (1080x1920) */
+    .video-paint-container {
+        flex: 1;
+        max-width: 350px; /* Limita a largura para o 1920 de altura não estourar a tela */
+        background: #000;
+        border: 4px solid #d6a1e3;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,1);
+    }
+
+    .video-paint-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 9 / 16; /* Força a proporção do vídeo vertical */
+        object-fit: cover;
+    }
+
+    /* Responsividade: Empilha em telas menores */
+    @media (max-width: 768px) {
+        .style-selector-wrapper {
+            flex-direction: column-reverse; /* Coloca os botões embaixo do vídeo no celular */
+            gap: 30px;
+            padding: 25px;
+        }
+        .video-paint-container {
+            max-width: 100%; /* Ocupa a largura total da tela no mobile */
+        }
+    }
 </style>
 {% endblock %}
 
@@ -314,7 +401,43 @@
             </div>
 
     </div>
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">ESCOLHA SEU ESTILO</h2>
+        <p class="transition-subtitle">> qual look no paint define o seu mood hoje?</p>
+    </div>
 
+    <div class="style-selector-wrapper" data-aos="fade-up" data-aos-duration="1200">
+        
+        <div class="style-buttons-container">
+            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_1.mp4') }}', this)">Look 1</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_2.mp4') }}', this)">Look 2</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_3.mp4') }}', this)">Look 3</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='assets/videos/iblog/beyonce/look_4.mp4') }}', this)">Look 4</button>
+        </div>
+
+        <div class="video-paint-container">
+            <video id="mainVerticalVideo" autoplay loop muted playsinline>
+                <source src="{{ url_for('static', filename='assets/videos/iblog/beyonce/look_1.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+
+<script>
+    function changeLook(videoUrl, clickedBtn) {
+        const videoElement = document.getElementById('mainVerticalVideo');
+        
+        // Atualiza a fonte do vídeo
+        videoElement.src = videoUrl;
+        videoElement.load();
+        videoElement.play();
+
+        // Atualiza o estado visual dos botões
+        const allBtns = document.querySelectorAll('.btn-look');
+        allBtns.forEach(btn => btn.classList.remove('active'));
+        clickedBtn.classList.add('active');
+    }
+</script>
 </div>
 
 <script>
