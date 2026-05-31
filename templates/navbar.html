@@ -1,0 +1,126 @@
+<div class="header-container">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+        .header-container {
+            width: 100%;
+            max-width: 1920px;   /* Largura máxima da sua nova imagem */
+            height: 200px;       /* Altura exata ajustada para 200px */
+            margin: 0 auto 20px auto;
+            position: relative;
+            
+            /* 1. ÁREA ROXA PROVISÓRIA (GRADIENTE ESTILO DIVA) */
+            background: linear-gradient(135deg, #8a2be2 0%, #4b00b3 100%);
+            
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza os botões verticalmente nos 200px de altura */
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Texto guia de fundo (sumirá por baixo da imagem quando você a importar) */
+        .header-placeholder-text {
+            position: absolute;
+            top: 25%;
+            left: 50 Img;
+            transform: translate(-50%, -50%);
+            font-family: 'Titan One', cursive;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        /* Container dos botões HTML */
+        .navbar-real {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* Espaçamento horizontal entre os botões */
+            width: 100%;
+            z-index: 10;
+            padding-top: 20px; /* Dá espaço em relação ao texto de guia superior */
+        }
+
+        /* Botão Cápsula em CSS Puro (Estilo Gel / Web 2.0) */
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 35px;
+            /* Degradê simulando o brilho das cápsulas originais */
+            background: linear-gradient(to bottom, #ff66cc 0%, #ff007f 50%, #cc0066 51%, #ff99cc 100%);
+            border: 3px solid #fff;
+            border-radius: 50px; /* Formato perfeito de cápsula arredondada */
+            
+            color: #fff;
+            font-family: 'Titan One', cursive;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+            box-shadow: 0 4px 0 #800040, 0 6px 10px rgba(0,0,0,0.4);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Reflexo linear simulando plástico/vidro no topo do botão */
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 10%;
+            width: 80%;
+            height: 35%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0));
+            border-radius: 50% 50% 0 0;
+            pointer-events: none;
+        }
+
+        /* Animação Hover (Balanço + Brilho Neon) */
+        .nav-btn:hover {
+            transform: scale(1.1) rotate(-2deg);
+            color: #ffff00;
+            border-color: #ffff00;
+            box-shadow: 0 4px 0 #800040, 0 0 15px #ff00ff;
+        }
+
+        /* Efeito de clique físico afundando o botão */
+        .nav-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #800040;
+        }
+
+        /* RESPONSIVIDADE: Adaptação para telas de celulares e tablets */
+        @media (max-width: 768px) {
+            .header-container { 
+                height: 140px; 
+            }
+            .header-placeholder-text {
+                font-size: 0.9rem;
+                top: 20%;
+            }
+            .nav-btn { 
+                padding: 6px 18px; 
+                font-size: 0.85rem; 
+            }
+            .navbar-real {
+                gap: 10px;
+                padding-top: 15px;
+            }
+        }
+    </style>
+
+    <div class="header-placeholder-text">
+        FONDO PARA IMAGEM 1920x200
+    </div>
+
+    <nav class="navbar-real">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/looks" class="nav-btn">Looks</a>
+        <a href="/songs" class="nav-btn">Songs</a>
+        <a href="/chat" class="nav-btn">Chat</a>
+    </nav>
+</div>
