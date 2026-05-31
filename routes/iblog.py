@@ -9,3 +9,7 @@ def iblog_beyonce():
 @iblog_bp.route('/lady_gaga')
 def iblog_ladygaga():
     return render_template('pages/iblog/lady_gaga.html')
+
+@iblog_bp.route('/rihanna')
+def iblog_rihanna():
+    return render_template('pages/iblog/rihanna.html')

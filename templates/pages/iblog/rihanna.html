@@ -1,0 +1,510 @@
+{% extends 'layouts/base_rihanna.html' %}
+
+{% block title %}Rihanna - iDiva's Portal{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Força o conteúdo a se comportar como uma coluna centralizada */
+    .page-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: transform !important;
+        width: 95% !important;
+        max-width: 1300px !important;
+        margin: 30px auto 50px auto !important;
+    }
+
+    .blog-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Estilos exclusivos das imagens do post */
+    .animated-page-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+        margin-bottom: 25px;
+    }
+
+    .transition-divider {
+        background: rgba(0, 0, 0, 0.85);
+        padding: 40px 20px;
+        text-align: center;
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        margin-bottom: 25px;
+        border-radius: 15px;
+    }
+
+    .transition-title {
+        font-family: 'VT323', monospace;
+        font-size: calc(2rem + 1vw);
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        line-height: 1;
+        margin: 0;
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 4px 4px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .transition-subtitle {
+        font-family: 'VT323', monospace;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 10px;
+    }
+
+    /* =========================================
+       ESTILOS DO CARROSSEL DE PERFORMANCES 
+       ========================================= */
+    .carousel-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1290px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid rgba(214, 161, 227, 0.3);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        margin-bottom: 40px;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 50px;
+        box-sizing: border-box;
+        gap: 40px;
+    }
+
+    /* Lado Esquerdo: Texto */
+    .slide-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .slide-text h3 {
+        font-family: 'Titan One', cursive;
+        font-size: 2.5rem;
+        color: #d6a1e3;
+        margin: 0 0 15px 0;
+        text-shadow: 2px 2px 0px #33004d;
+        line-height: 1.1;
+    }
+
+    .slide-text p {
+        font-family: sans-serif;
+        font-size: 1.1rem;
+        color: #e0e0e0;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Lado Direito: Vídeo */
+    .slide-video {
+        flex: 1.5;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .slide-video iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Botões de Navegação */
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(214, 161, 227, 0.8);
+        color: #fff;
+        border: 2px solid #fff;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .carousel-btn:hover {
+        background: #ffff00;
+        color: #33004d;
+        border-color: #33004d;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+
+    /* Indicadores (Bolinhas) */
+    .carousel-indicators {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+        background: rgba(255,255,255,0.4);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .indicator.active {
+        background: #d6a1e3;
+        box-shadow: 0 0 8px #d6a1e3;
+    }
+
+    /* Responsividade do Carrossel */
+    @media (max-width: 900px) {
+        .carousel-slide {
+            flex-direction: column;
+            padding: 30px 20px;
+            text-align: center;
+            gap: 20px;
+        }
+        .slide-text h3 {
+            font-size: 1.8rem;
+        }
+        .slide-text p {
+            font-size: 1rem;
+        }
+        .carousel-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
+    }
+
+    /* =========================================
+       ESCOLHA SEU ESTILO (INTERATIVO)
+       ========================================= */
+    .style-selector-wrapper {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 50px auto;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid rgba(214, 161, 227, 0.5);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    /* LADO ESQUERDO: Botões */
+    .style-buttons-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .btn-look {
+        padding: 15px 25px;
+        background: linear-gradient(180deg, #333 0%, #111 100%);
+        border: 2px solid #d6a1e3;
+        color: #d6a1e3;
+        font-family: 'VT323', monospace;
+        font-size: 1.8rem;
+        border-radius: 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.2s ease;
+        box-shadow: 0 6px 0 #5c3a63;
+        text-align: center;
+    }
+
+    .btn-look:hover {
+        background: #d6a1e3;
+        color: #000;
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 #5c3a63;
+    }
+
+    /* Botão selecionado (afundado) */
+    .btn-look.active {
+        background: #d6a1e3;
+        color: #000;
+        transform: translateY(6px);
+        box-shadow: 0 0px 0 #5c3a63;
+        border-color: #fff;
+    }
+
+    /* LADO DIREITO: Vídeo Vertical */
+    .video-paint-container {
+        flex: 1;
+        max-width: 350px;
+        background: #000;
+        border: 4px solid #d6a1e3;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,1);
+    }
+
+    .video-paint-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 9 / 16;
+        object-fit: cover;
+    }
+
+    /* Responsividade: Empilha em telas menores */
+    @media (max-width: 768px) {
+        .style-selector-wrapper {
+            flex-direction: column-reverse;
+            gap: 30px;
+            padding: 25px;
+        }
+        .video-paint-container {
+            max-width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="blog-container">
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1000">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_1.png') }}" alt="Conteúdo Parte 1" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">A ERA RIHANNA</h2>
+        <p class="transition-subtitle">> revisitando o império da maior empresária do pop...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_2.png') }}" alt="Conteúdo Parte 2" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">GOOD GIRL GONE BAD</h2>
+        <p class="transition-subtitle">> a virada de chave que moldou uma lenda global...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_3.png') }}" alt="Conteúdo Parte 3" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">LOUD & RATED R</h2>
+        <p class="transition-subtitle">> os cabelos vermelhos e a era mais ousada dos charts...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_4.png') }}" alt="Conteúdo Parte 4" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">ANTI ERA</h2>
+        <p class="transition-subtitle">> a obra-prima que redefiniu os caminhos da música urbana...</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_5.png') }}" alt="Conteúdo Parte 5" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">FENTY EMPIRE</h2>
+        <p class="transition-subtitle">> da dominação dos palcos para o topo do mundo dos negócios.</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_6.png') }}" alt="Conteúdo Parte 6" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">NAVY FANDOM</h2>
+        <p class="transition-subtitle">> uma conexão inabalável com a fã-base mais icônica da internet.</p>
+    </div>
+
+    <div class="w-100" data-aos="fade-up" data-aos-duration="1200">
+        <img src="{{ url_for('static', filename='media/iblog/rihanna/pag_7.png') }}" alt="Conteúdo Parte 7" class="animated-page-img">
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">PERFORMANCES</h2>
+        <p class="transition-subtitle">> o palco é onde a verdadeira mágica acontece...</p>
+    </div>
+
+    <div class="carousel-wrapper" data-aos="fade-up" data-aos-duration="1200">
+        
+        <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+
+        <div class="carousel-track" id="videoTrack">
+            
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Super Bowl LVII</h3>
+                    <p>O retorno épico. Do alto de palcos flutuantes e vestindo um look todo vermelho marcante, Rihanna entregou um medley cirúrgico de hits mundiais.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/HjBo--1n8lI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>VMA 2016 Vanguard</h3>
+                    <p>Dominando a noite com quatro blocos de apresentações surreais. Uma verdadeira antologia de gêneros, celebrando do dancehall ao trap.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/O-LwMshx1S0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Grammy Awards 2018</h3>
+                    <p>Uma explosão de carisma e coreografia marcante com "Wild Thoughts". Os vocais potentes e a energia latina incendiaram a premiação.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/9qEMX7BfB4s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-text">
+                    <h3>Diamonds World Tour</h3>
+                    <p>Brilhando em uma das eras de arena mais lucrativas do pop. Os arranjos ao vivo transformaram faixas clássicas em verdadeiros hinos de estádio.</p>
+                </div>
+                <div class="slide-video">
+                    <iframe src="https://www.youtube.com/embed/zhRp1mScBLI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="carousel-indicators" id="indicatorsContainer"></div>
+
+    </div>
+
+    <div class="transition-divider" data-aos="zoom-in" data-aos-duration="800">
+        <h2 class="transition-title">ESCOLHA SEU ESTILO</h2>
+        <p class="transition-subtitle">> qual look no paint define o seu mood hoje?</p>
+    </div>
+
+    <div class="style-selector-wrapper" data-aos="fade-up" data-aos-duration="1200">
+        
+        <div class="style-buttons-container">
+            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_1.mp4') }}', this)">Look 1</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_2.mp4') }}', this)">Look 2</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_3.mp4') }}', this)">Look 3</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_4.mp4') }}', this)">Look 4</button>
+        </div>
+
+        <div class="video-paint-container">
+            <video id="mainVerticalVideo" autoplay loop muted playsinline>
+                <source src="{{ url_for('static', filename='media/iblog/rihanna/look_1.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function changeLook(videoUrl, clickedBtn) {
+        const videoElement = document.getElementById('mainVerticalVideo');
+        
+        // Atualiza a fonte do vídeo
+        videoElement.src = videoUrl;
+        videoElement.load();
+        videoElement.play();
+
+        // Atualiza o estado visual dos botões
+        const allBtns = document.querySelectorAll('.btn-look');
+        allBtns.forEach(btn => btn.classList.remove('active'));
+        clickedBtn.classList.add('active');
+    }
+</script>
+
+<script>
+    let currentSlide = 0;
+    const track = document.getElementById('videoTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    const indicatorsContainer = document.getElementById('indicatorsContainer');
+
+    // Cria as bolinhas de indicação dinamicamente
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('indicator');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        indicatorsContainer.appendChild(dot);
+    });
+
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateCarousel() {
+        // Move a trilha
+        const offset = -currentSlide * 100;
+        track.style.transform = `translateX(${offset}%)`;
+
+        // Atualiza bolinhas
+        indicators.forEach(dot => dot.classList.remove('active'));
+        indicators[currentSlide].classList.add('active');
+
+        // Pausa os vídeos ao mudar de slide (limpando e recolocando o src do iframe)
+        slides.forEach(slide => {
+            const iframe = slide.querySelector('iframe');
+            if (iframe) {
+                let tempSrc = iframe.src;
+                iframe.src = tempSrc; 
+            }
+        });
+    }
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+</script>
+{% endblock %}
