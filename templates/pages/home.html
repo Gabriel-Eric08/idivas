@@ -252,8 +252,8 @@
         margin-bottom: 10px;
     }
 
-    .track-title { font-size: 1.8rem; margin: 0; line-height: 1; }
-    .track-artist { font-size: 1.2rem; margin: 0; color: #aaffaa; }
+    .track-title { font-size: 1.8rem; margin: 0; line-height: 1; color: #a066ff; text-shadow: 0 0 5px rgba(160, 102, 255, 0.9); }
+    .track-artist { font-size: 1.2rem; margin: 0; color: #a066ff; }
 
     #audio-spectrum {
         width: 100%;
@@ -910,7 +910,7 @@
 
         for (let i = 0; i < bufferLength; i++) {
             barHeight = (dataArray[i] / 255) * canvas.height * 0.9; 
-            ctx.fillStyle = '#00ff00';
+            ctx.fillStyle = '#a066ff';
             ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
             x += barWidth;
         }
