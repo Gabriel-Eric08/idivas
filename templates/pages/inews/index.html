@@ -38,11 +38,11 @@
 
     .inews-title {
         font-family: 'VT323', monospace; 
-        color: #00ff00; 
+        color: #ffffff; 
         font-size: 3rem;
         margin-bottom: 5px;
         text-transform: uppercase;
-        text-shadow: 0 0 5px #00ff00; 
+        text-shadow: 0 0 5px rgba(255,255,255,0.5); 
         line-height: 1;
     }
 
@@ -95,7 +95,7 @@
     .carousel-control-prev:hover .custom-arrow-btn, 
     .carousel-control-next:hover .custom-arrow-btn {
         transform: scale(1.05);
-        border-color: #00ff00; 
+        border-color: #ffffff; 
     }
 
     /* ========================================================= */
@@ -118,17 +118,17 @@
 
     <div class="inews-master-wrapper" data-aos="fade-up" data-aos-duration="1000">
 
+        <div class="inews-text-header">
+            <h2 class="inews-title">INEWS</h2>
+            <p class="inews-desc">As fofocas mais quentes e os acontecimentos bombásticos do momento!</p>
+        </div>
+
         <div id="iNewsSlider" class="carousel slide" data-bs-ride="false" data-bs-touch="true">
             
             <div class="carousel-inner">
                 
                 {% for imagem in imagens_jornal %}
                     <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
-                        
-                        <div class="inews-text-header">
-                            <h2 class="inews-title">BOMBA DO DIA #{{ loop.index }}</h2>
-                            <p class="inews-desc">Deslize para ver as últimas fofocas exclusivas e acontecimentos bombásticos!</p>
-                        </div>
 
                         <div class="inews-image-wrapper">
                             <img src="{{ url_for('static', filename='media/jornal/' ~ imagem) }}" class="inews-img" alt="Notícia {{ loop.index }}">
