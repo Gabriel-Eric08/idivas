@@ -4,33 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}iDiva's Portal{% endblock %}</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Modak&family=VT323&family=Pacifico&family=Titan+One&display=swap" rel="stylesheet">
-
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(
-                180deg,
-                #37add1 0%,
-                #1a0826 60%,
-                #0d0413 100%
-            ) !important;
+            /* Fundo: roxo para preto */
+            background: linear-gradient(180deg, #4a1a66 0%, #000000 100%) !important;
             background-attachment: fixed !important;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             color: #fff;
             cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym49.cur'), auto !important;
@@ -38,66 +24,48 @@
 
         .main-wrapper {
             width: 100%;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
-        /*
-        =====================================================
-        CONTEÚDO PRINCIPAL
-        =====================================================
-
-        Antes:
-        - max-width: 1300px
-        - align-items: center
-
-        Agora:
-        - largura total
-        - alinhado à esquerda
-        - ocupa o mesmo espaço visual da navbar
-        */
-
+        /* --- O SEGREDO DA CENTRALIZAÇÃO --- */
         .page-content {
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 0 24px 50px 24px;
-
+            width: 95%;
+            max-width: 1300px; /* Trava o crescimento lateral */
+            margin: 0 auto 50px auto; /* Centraliza na tela e dá espaço embaixo */
             display: flex;
             flex-direction: column;
-            align-items: stretch;
+            align-items: center;
         }
 
-        /* CSS específico das páginas */
+        /* Bloco para CSS extra de outras páginas não poluir o base */
+        .blog-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         {% block extra_css %}{% endblock %}
+    
     </style>
-
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-
     <div class="main-wrapper">
-
         {% include 'includes/navbar.html' %}
 
         <main class="page-content">
             {% block content %}{% endblock %}
         </main>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
-        AOS.init({
-            offset: 100,
-            once: false,
-            mirror: true
-        });
+        // Inicializa as animações de rolagem para todas as páginas
+        AOS.init({ offset: 100, once: false, mirror: true });
     </script>
-
     {% block extra_js %}{% endblock %}
 </body>
 </html>

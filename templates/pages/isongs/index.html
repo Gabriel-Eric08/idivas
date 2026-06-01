@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base_isong.html' %}
 
 {% block title %}iSongs{% endblock %}
 
@@ -8,9 +8,9 @@
     /* --- LAYOUT GRUDADO COM FUNDO CINZA SÓLIDO (ESTILO APP) --- */
     /* ========================================================= */
     
-    /* Container Master: Fundo cinza sólido, eliminando o efeito flutuante */
+    /* Container Master: Fundo roxo para preto, eliminando o efeito flutuante */
     .isongs-master-wrapper {
-        background-color: #181818; /* Cinza escuro sólido clássico */
+        background: linear-gradient(180deg, #4a1a66 0%, #000000 100%); /* Roxo para preto */
         color: #ffffff;
         width: 100%;
         min-height: 100vh;
@@ -35,7 +35,7 @@
         color: #fff;
     }
     .isongs-master-wrapper {
-    background-color: #181818;
+    background: linear-gradient(180deg, #4a1a66 0%, #000000 100%);
     color: #ffffff;
 
     width: 100%;
