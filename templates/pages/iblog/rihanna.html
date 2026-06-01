@@ -279,12 +279,26 @@
         box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,1);
     }
 
-    .video-paint-container video {
+    .video-paint-container img {
         width: 100%;
         height: auto;
         display: block;
         aspect-ratio: 9 / 16;
         object-fit: cover;
+    }
+
+    .look-image {
+        opacity: 0;
+        transform: translateY(6px) scale(0.995);
+    }
+
+    .look-image.fade-in {
+        animation: lookFadeIn 420ms ease forwards;
+    }
+
+    @keyframes lookFadeIn {
+        from { opacity: 0; transform: translateY(6px) scale(0.995); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* Responsividade: Empilha em telas menores */
@@ -428,16 +442,14 @@
     <div class="style-selector-wrapper" data-aos="fade-up" data-aos-duration="1200">
         
         <div class="style-buttons-container">
-            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_1.mp4') }}', this)">Look 1</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_2.mp4') }}', this)">Look 2</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_3.mp4') }}', this)">Look 3</button>
-            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/rihanna/look_4.mp4') }}', this)">Look 4</button>
+            <button class="btn-look active" onclick="changeLook('{{ url_for('static', filename='media/iblog/looks_rihanna/look_1.png') }}', this)">Look 1</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/looks_rihanna/look_2.png') }}', this)">Look 2</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/looks_rihanna/look_3.png') }}', this)">Look 3</button>
+            <button class="btn-look" onclick="changeLook('{{ url_for('static', filename='media/iblog/looks_rihanna/look_4.png') }}', this)">Look 4</button>
         </div>
 
         <div class="video-paint-container">
-            <video id="mainVerticalVideo" autoplay loop muted playsinline>
-                <source src="{{ url_for('static', filename='media/iblog/rihanna/look_1.mp4') }}" type="video/mp4">
-            </video>
+            <img id="mainLookImage" src="{{ url_for('static', filename='media/iblog/looks_rihanna/look_1.png') }}" alt="Look 1" class="look-image">
         </div>
 
     </div>
@@ -445,19 +457,26 @@
 </div>
 
 <script>
-    function changeLook(videoUrl, clickedBtn) {
-        const videoElement = document.getElementById('mainVerticalVideo');
-        
-        // Atualiza a fonte do vídeo
-        videoElement.src = videoUrl;
-        videoElement.load();
-        videoElement.play();
+    function changeLook(imageUrl, clickedBtn) {
+        const img = document.getElementById('mainLookImage');
+
+        // Reinicia e aplica animação de entrada
+        img.classList.remove('fade-in');
+        void img.offsetWidth; // forçar reflow para reiniciar animação
+        img.src = imageUrl;
+        img.classList.add('fade-in');
 
         // Atualiza o estado visual dos botões
         const allBtns = document.querySelectorAll('.btn-look');
         allBtns.forEach(btn => btn.classList.remove('active'));
         clickedBtn.classList.add('active');
     }
+
+    // Aplicar animação inicial ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        const img = document.getElementById('mainLookImage');
+        if (img) img.classList.add('fade-in');
+    });
 </script>
 
 <script>
