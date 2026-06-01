@@ -13,8 +13,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Fundo em tom rosa/lilás, sutilmente mais escuro */
-            background: #DCC4EF !important;
+            /* Fundo: gradiente verde escuro para preto */
+            background: linear-gradient(180deg, #1a4d2e 0%, #000000 100%) !important;
             background-attachment: fixed !important;
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
@@ -40,7 +40,14 @@
         }
 
         /* Bloco para CSS extra de outras páginas não poluir o base */
+        .blog-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         {% block extra_css %}{% endblock %}
+    
     </style>
     {% block extra_head %}{% endblock %}
 </head>
